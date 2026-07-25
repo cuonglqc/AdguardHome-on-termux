@@ -25,11 +25,17 @@ Chào bạn, đây là một hướng dẫn rất hữu ích để tận dụng 
 Mở ứng dụng **Termux** lên, copy toàn bộ lệnh bên dưới, dán vào Termux rồi nhấn **Enter**:
 
 ```bash
-pkg update && pkg upgrade -y && pkg install wget tsu nano -y
+pkg update && pkg upgrade -y && pkg install wget nano -y
 
 ```
 
 *(Lệnh này để cập nhật hệ thống Termux và cài các công cụ cần thiết như wget, tsu, nano).*
+
+# Tắt tính năng check Internet ngầm của Android, giúp box yếu không bị dồn ứ request gây khựng và rớt gói.
+```
+su
+settings put global captive_portal_mode 0
+```
 
 Tiếp theo, tùy thuộc vào loại chip (CPU) của máy bạn mà chọn **1 trong 3 dòng lệnh** dưới đây để tải AdGuard Home:
 

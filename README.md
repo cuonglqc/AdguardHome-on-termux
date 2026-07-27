@@ -25,7 +25,8 @@ Chào bạn, đây là một hướng dẫn rất hữu ích để tận dụng 
 Mở ứng dụng **Termux** lên, copy toàn bộ lệnh bên dưới, dán vào Termux rồi nhấn **Enter**:
 
 ```bash
-pkg update && pkg upgrade -y && pkg install wget nano -y
+pkg install wget nano -y
+
 
 ```
 
@@ -41,21 +42,22 @@ Tiếp theo, tùy thuộc vào loại chip (CPU) của máy bạn mà chọn **1
 
 * **Nếu máy bạn chạy chip 32-bit (ARMv7 - dòng máy cũ):**
 ```bash
-wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.107.52/AdGuardHome_linux_armv7.tar.gz && tar -vxf AdGuardHome_linux_armv7.tar.gz
+wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.107.52/AdGuardHome_linux_armv7.tar.gz && tar -vxf AdGuardHome_linux_armv7.tar.gz && cd ~/AdGuardHome && wget -q -O cacert.pem.tmp https://curl.se/ca/cacert.pem && mv cacert.pem.tmp cacert.pem
 
 ```
 
 
 * **Nếu máy bạn chạy chip 64-bit (ARMv8 / ARM64 - đa số máy đời mới hơn):**
 ```bash
-wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.107.52/AdGuardHome_linux_arm64.tar.gz && tar -vxf AdGuardHome_linux_arm64.tar.gz
+wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.107.52/AdGuardHome_linux_arm64.tar.gz && tar -vxf AdGuardHome_linux_arm64.tar.gz && cd ~/AdGuardHome && wget -q -O cacert.pem.tmp https://curl.se/ca/cacert.pem && mv cacert.pem.tmp cacert.pem
 
 ```
 
 
 * **Nếu máy chạy chip cũ hơn nữa (ARMv6):**
 ```bash
-wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.107.52/AdGuardHome_linux_armv6.tar.gz && tar -vxf AdGuardHome_linux_armv6.tar.gz
+wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.107.52/AdGuardHome_linux_armv6.tar.gz && tar -vxf AdGuardHome_linux_armv6.tar.gz && cd ~/AdGuardHome && wget -q -O cacert.pem.tmp https://curl.se/ca/cacert.pem && mv cacert.pem.tmp cacert.pem
+
 
 ```
 

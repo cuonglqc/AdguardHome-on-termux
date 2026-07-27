@@ -31,7 +31,7 @@ pkg update && pkg upgrade -y && pkg install wget nano -y
 
 *(Lệnh này để cập nhật hệ thống Termux và cài các công cụ cần thiết như wget, tsu, nano).*
 
-# Tắt tính năng check Internet ngầm của Android, giúp box yếu không bị dồn ứ request gây khựng và rớt gói.
+## Tắt tính năng check Internet ngầm của Android, giúp box yếu không bị dồn ứ request gây khựng và rớt gói.
 ```
 su
 settings put global captive_portal_mode 0
@@ -137,3 +137,9 @@ chmod +x ~/.termux/boot/start-adguard
 2. Vào phần **Cài đặt pin** trên điện thoại/TV Box, tìm ứng dụng **Termux** và **Termux:Boot**, chọn **Không tối ưu hóa pin (Unrestricted / No restriction)** để tránh việc Android tự động tắt ứng dụng khi chạy ngầm.
 
 Bây giờ bạn có thể khởi động lại máy (Reboot) để tận hưởng thành quả! Chúc bạn thành công!
+
+
+
+## entware 
+mount -t tmpfs tmpfs /lib
+ln -sf /data/entware-magisk/entware/lib/* /lib/

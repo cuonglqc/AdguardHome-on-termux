@@ -1,3 +1,1 @@
-pkg install wget nano -y
-wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.107.52/AdGuardHome_linux_armv7.tar.gz && tar -vxf AdGuardHome_linux_armv7.tar.gz && cd ~/AdGuardHome && wget -q -O cacert.pem.tmp https://curl.se/ca/cacert.pem && mv cacert.pem.tmp cacert.pem
-su -c settings put global captive_portal_mode 0
+pkg install wget nano -y && wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.107.52/AdGuardHome_linux_armv7.tar.gz && tar -vxf AdGuardHome_linux_armv7.tar.gz && cd ~/AdGuardHome && wget -q -O cacert.pem.tmp https://curl.se/ca/cacert.pem && mv cacert.pem.tmp cacert.pem && su -c settings put global captive_portal_mode 0 && ping -c 10  gooogle.com

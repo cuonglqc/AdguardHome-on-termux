@@ -1,0 +1,12 @@
+#!/data/data/com.termux/files/usr/bin/sh
+
+# wake termux and sshd
+termux-wake-lock && sshd
+
+# AdGuardHome 
+cd AdGuardHome
+su -c 'SSL_CERT_FILE=/data/data/com.termux/files/home/AdGuardHome/cacert.pem ./AdGuardHome 2>&1' &
+
+# Update cacert.pem after boot
+( sleep 300 && wget -q -O cacert.pem.tmp https://curl.se/ca/cacert.pem && mv cacert.pem.tmp cacert.pem ) &
+

@@ -37,7 +37,21 @@ pkg install wget nano -y
 su
 settings put global captive_portal_mode 0
 ```
+## thay đổi chế độ cpu
+1. performance  : Ép CPU luôn chạy xung MAX. Rất nhanh nhưng NÓNG và tốn điện nhất.
+2. interactive  : Nhạy với thao tác vuốt chạm. Chỉ cần tác vụ nhỏ là vọt xung MAX ngay, rất NÓNG.
+3. ondemand     : Rảnh chạy xung MIN, có tác vụ nhảy vọt MAX rồi hạ ngay. MÁT, phản hồi nhanh (Nên dùng).
+4. conservative : Tăng/giảm xung từ từ từng nấc. MÁT, nhưng phản hồi chậm hơn ondemand.
+5. powersave    : Ép CPU luôn chạy xung MIN. MÁT NHẤT, tiết kiệm điện nhất nhưng xử lý chậm nhất.
+6. userspace    : Cho phép phần mềm bên ngoài tự chỉnh xung thủ công.
 
+=> ondemand
+```bash
+for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo "ondemand" > $cpu; done
+```
+```bash
+cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+```
 Tiếp theo, tùy thuộc vào loại chip (CPU) của máy bạn mà chọn **1 trong 3 dòng lệnh** dưới đây để tải AdGuard Home:
 
 * **Nếu máy bạn chạy chip 32-bit (ARMv7 - dòng máy cũ):**

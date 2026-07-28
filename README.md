@@ -54,6 +54,16 @@ cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 ```
 Tiếp theo, tùy thuộc vào loại chip (CPU) của máy bạn mà chọn **1 trong 3 dòng lệnh** dưới đây để tải AdGuard Home:
 
+## Hạ độ phân giải xuống mốc thấp nhất (480p)
+Tại giao diện root (su), bạn gõ lệnh:
+
+```bash
+wm size 854x480
+wm density 160
+```
+(Lệnh wm density giúp chỉnh lại tỷ lệ giao diện cho bớt lệch khi hạ độ phân giải).
+Nếu sau này muốn trả lại mặc định chỉ cần gõ: wm size reset và wm density reset.
+
 * **Nếu máy bạn chạy chip 32-bit (ARMv7 - dòng máy cũ):**
 ```bash
 wget https://github.com/AdguardTeam/AdGuardHome/releases/download/v0.107.52/AdGuardHome_linux_armv7.tar.gz && tar -vxf AdGuardHome_linux_armv7.tar.gz && cd ~/AdGuardHome && wget -q -O cacert.pem.tmp https://curl.se/ca/cacert.pem && mv cacert.pem.tmp cacert.pem

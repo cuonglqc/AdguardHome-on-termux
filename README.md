@@ -84,10 +84,11 @@ wm size
    - Tắt xuất hình ngầm: input keyevent 26 -> Cần gõ lại khi Reboot.
 
 3. SỐT LỆNH BỎ TÚI (Chạy lại sau khi Reboot máy):
+```bash
    su
    for c in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo "ondemand" > $c; done
    for m in /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq; do echo "1008000" > $m; done
-   input keyevent 26
+```
 
 
 * **Nếu máy bạn chạy chip 32-bit (ARMv7 - dòng máy cũ):**

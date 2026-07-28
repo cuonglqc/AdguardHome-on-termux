@@ -54,7 +54,7 @@ cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 ```
 Tiếp theo, tùy thuộc vào loại chip (CPU) của máy bạn mà chọn **1 trong 3 dòng lệnh** dưới đây để tải AdGuard Home:
 
-## Hạ độ phân giải xuống mốc thấp nhất (480p)
+### Hạ độ phân giải xuống mốc thấp nhất (480p)
 Tại giao diện root (su), bạn gõ lệnh:
 
 ```bash
@@ -62,9 +62,33 @@ wm size 854x480
 wm density 160
 ```
 (Lệnh wm density giúp chỉnh lại tỷ lệ giao diện cho bớt lệch khi hạ độ phân giải).
-Nếu sau này muốn trả lại mặc định chỉ cần gõ: wm size reset và wm density reset.
+Nếu sau này muốn trả lại mặc ft chỉ cần gõ: wm size reset và wm density reset.
 cat /sys/class/graphics/fb0/virtual_size
 wm size
+
+=== TÓM TẮT CÁC BƯỚC CẤU HÌNH TỐI ƯU BOX H2+ ===
+
+1. CPU & GOVERNOR (Mát máy, chạy 24/7):
+   - Đã chuyển sang: ondemand (Cân bằng) / powersave (Mát nhất).
+   - Hạ xung Max về: 1.0GHz (1008000 kHz).
+   * Lưu ý: Mất cài đặt khi Reboot (cần chạy lại lệnh khi bật máy).
+
+2. ĐỒ HỌA & MÀN HÌNH (Giảm tải GPU/CPU):
+   - Hạ độ phân giải: 854x480 (480p) -> TỰ LƯU vĩnh viễn.
+   - Tắt Animation: Chỉnh 3 tỷ lệ  0.0 -> TỰ LƯU vĩnh viễn.
+```bash
+   settings put global window_animation_scale 0.0
+   settings put global transition_animation_scale 0.0
+   settings put global animator_duration_scale 0.0
+```
+   - Tắt xuất hình ngầm: input keyevent 26 -> Cần gõ lại khi Reboot.
+
+3. SỐT LỆNH BỎ TÚI (Chạy lại sau khi Reboot máy):
+   su
+   for c in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo "ondemand" > $c; done
+   for m in /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq; do echo "1008000" > $m; done
+   input keyevent 26
+
 
 * **Nếu máy bạn chạy chip 32-bit (ARMv7 - dòng máy cũ):**
 ```bash

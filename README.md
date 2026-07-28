@@ -63,6 +63,8 @@ wm density 160
 ```
 (Lệnh wm density giúp chỉnh lại tỷ lệ giao diện cho bớt lệch khi hạ độ phân giải).
 Nếu sau này muốn trả lại mặc định chỉ cần gõ: wm size reset và wm density reset.
+cat /sys/class/graphics/fb0/virtual_size
+wm size
 
 * **Nếu máy bạn chạy chip 32-bit (ARMv7 - dòng máy cũ):**
 ```bash

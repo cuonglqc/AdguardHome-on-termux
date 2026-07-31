@@ -155,16 +155,32 @@ nano ~/.termux/boot/start-adguard
 ```bash
 #!/data/data/com.termux/files/usr/bin/sh
 
-# wake termux and sshd
+# 1. Giữ Termux không bị ngủ ngầm & Bật SSH
 termux-wake-lock && sshd
 
-# AdGuardHome 
-cd AdGuardHome
-su -c 'SSL_CERT_FILE=/data/data/com.termux/files/home/AdGuardHome/cacert.pem ./AdGuardHome 2>&1' &
+# Khôi phục ngày giờ từ file lưu gần nhất (Chạy qua Root)
+su -c 'date $(cat /data/data/com.termux/files/home/time/last_time.txt)'
 
-# Update cacert.pem after boot
-( sleep 300 && wget -q -O cacert.pem.tmp https://curl.se/ca/cacert.pem && mv cacert.pem.tmp cacert.pem ) &
+# Bắt đầu vòng lặp tự động lưu giờ ngầm
+sh /data/data/com.termux/files/home/time/savetime.sh &
 
+# 2. Chạy Blocky ở cổng 5353 (Chạy ngầm)
+cd /data/data/com.termux/files/home/blocky
+nohup ./blocky --config config.yml > /dev/null 2>&1 &
+
+# 3. Chạy AdGuard Home ở cổng 53 (Quyền root)
+cd /data/data/com.termux/files/home/AdGuardHome
+su -c 'SSL_CERT_FILE=/data/data/com.termux/files/home/AdGuardHome/cacert.pem ./AdGuardHome' > /dev/null 2>&1 &
+
+# 4. Tối ưu Governor CPU sang ondemand (Chạy qua Root)
+su -c 'for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo "ondemand" > $cpu; done'
+
+# 5. Tự động cập nhật file chứng chỉ SSL cacert.pem sau 5 phút (Đường dẫn tuyệt đối)
+(
+  sleep 300
+  CERT_DIR="/data/data/com.termux/files/home/AdGuardHome"
+  wget -q -O "$CERT_DIR/cacert.pem.tmp" https://curl.se/ca/cacert.pem && mv "$CERT_DIR/cacert.pem.tmp" "$CERT_DIR/cacert.pem"
+) &
 ```
 
 
